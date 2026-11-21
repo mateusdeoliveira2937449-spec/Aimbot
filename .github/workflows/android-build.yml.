@@ -1,9 +1,14 @@
 
-name: Build Android APK
+name: Criar APK para Android
 
 on:
-  push:
   workflow_dispatch:
+  push:
+    paths:
+      - 'app/**'
+      - 'build.gradle'
+      - 'settings.gradle'
+      - '.github/workflows/android-build.yml'
 
 jobs:
   build:
@@ -27,7 +32,7 @@ jobs:
       - name: Configurar Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Instalar componentes Android
+      - name: Instalar componentes
         run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
       - name: Gerar APK
