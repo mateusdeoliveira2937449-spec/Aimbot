@@ -1,0 +1,22 @@
+name: Build HeadAim
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compilar simulador
+        run: |
+          g++ -std=c++17 main.cpp AimSystem.cpp -o HeadAim
+
+      - name: Salvar resultado
+        uses: actions/upload-artifact@v4
+        with:
+          name: HeadAim-Simulation
+          path: HeadAim
